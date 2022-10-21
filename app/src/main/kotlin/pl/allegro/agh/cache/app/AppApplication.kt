@@ -1,4 +1,4 @@
-package pl.allegro.agh.cache.app.app
+package pl.allegro.agh.cache.app
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

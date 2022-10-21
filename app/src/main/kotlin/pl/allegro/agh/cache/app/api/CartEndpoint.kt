@@ -1,4 +1,4 @@
-package pl.allegro.agh.cache.app.app.api
+package pl.allegro.agh.cache.app.api
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

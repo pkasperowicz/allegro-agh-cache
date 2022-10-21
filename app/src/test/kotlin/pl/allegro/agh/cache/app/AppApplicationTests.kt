@@ -1,4 +1,4 @@
-package pl.allegro.agh.cache.app.app
+package pl.allegro.agh.cache.app
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
