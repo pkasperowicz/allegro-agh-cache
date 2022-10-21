@@ -8,4 +8,4 @@
  */
 
 rootProject.name = "allegro-agh-cache"
-include("app")
+include("app", "user-service")
