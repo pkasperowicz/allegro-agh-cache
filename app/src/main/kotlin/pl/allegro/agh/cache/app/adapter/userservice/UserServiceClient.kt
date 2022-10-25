@@ -11,8 +11,8 @@ class UserServiceClient(
 
     override fun getUserScore(userId: String): Int {
         val uri = UriComponentsBuilder.fromUriString(baseUrl)
-            .path("user")
-            .path(userId)
+            .pathSegment("user")
+            .pathSegment(userId)
             .build()
             .toUri()
         return restTemplate.getForEntity(uri, UserResponse::class.java).body!!.score
