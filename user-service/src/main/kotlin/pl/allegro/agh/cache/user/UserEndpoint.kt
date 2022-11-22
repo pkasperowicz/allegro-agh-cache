@@ -16,7 +16,7 @@ class UserEndpoint {
     @GetMapping("/user/{userId}")
     fun getSpecialOffer(@PathVariable userId: String): ResponseEntity<UserResponse> {
         // This will simulate service delays
-        val delay = abs(200 * random.asJavaRandom().nextGaussian()).toLong()
+        val delay = abs(200 * random.asJavaRandom().nextGaussian()).toLong() + 100
         Thread.sleep(delay)
 
         // This is just simulation of changing user score

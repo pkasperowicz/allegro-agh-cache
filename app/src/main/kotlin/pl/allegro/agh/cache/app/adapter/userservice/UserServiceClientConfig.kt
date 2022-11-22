@@ -7,6 +7,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.client.RestTemplate
+import pl.allegro.agh.cache.app.domain.UserScoreProvider
 import java.time.Duration
 
 @Configuration
@@ -23,12 +24,24 @@ class UserServiceClientConfig {
 
 
     @Bean
-    fun userServiceClient(restTemplate: RestTemplate, clientConfig: ClientConfig): UserServiceClient {
-        return UserServiceClient(restTemplate, clientConfig.url)
+    fun userScoreProvider(restTemplate: RestTemplate, clientConfig: ClientConfig): UserScoreProvider {
+        val userServiceClient = UserServiceClient(restTemplate, clientConfig.url)
+        return if (clientConfig.cache.enabled)
+            CachedUserServiceClient(userServiceClient)
+        else userServiceClient
     }
 
 }
 
 @ConfigurationProperties("user-service")
 @ConstructorBinding
-data class ClientConfig(val url: String, val connectionTimeout: Duration, val readTimeout: Duration)
+data class ClientConfig(
+    val url: String,
+    val connectionTimeout: Duration,
+    val readTimeout: Duration,
+    val cache: CacheConfig,
+) {
+    data class CacheConfig(
+        val enabled: Boolean
+    )
+}

@@ -8,3 +8,5 @@ user-service:
   connectionTimeout: PT0.5S
   readTimeout: PT0.5S
   url: http://user-service:8080
+  cache:
+    enabled: true
