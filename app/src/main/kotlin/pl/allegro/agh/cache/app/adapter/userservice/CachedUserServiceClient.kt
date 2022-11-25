@@ -4,6 +4,7 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import com.github.benmanes.caffeine.cache.LoadingCache
 import io.micrometer.core.instrument.Gauge
 import io.micrometer.core.instrument.MeterRegistry
+import io.micrometer.core.instrument.binder.cache.CaffeineCacheMetrics
 import pl.allegro.agh.cache.app.domain.UserScoreProvider
 import java.time.Duration
 
@@ -21,9 +22,7 @@ class CachedUserServiceClient(
         }
 
     init {
-        Gauge.builder("cache.hit_count") { cache.stats().hitCount() }.register(meterRegistry)
-        Gauge.builder("cache.miss_count") { cache.stats().missCount() }.register(meterRegistry)
-        Gauge.builder("cache.hit_rate") { cache.stats().hitRate() }.register(meterRegistry)
+        CaffeineCacheMetrics.monitor(meterRegistry, cache, "user-score-cache")
     }
 
     override fun getUserScore(userId: String): Int {

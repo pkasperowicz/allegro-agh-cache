@@ -1,5 +1,6 @@
 package pl.allegro.agh.cache.app.adapter.userservice
 
+import io.micrometer.core.instrument.MeterRegistry
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
 import org.springframework.boot.context.properties.EnableConfigurationProperties
@@ -24,10 +25,10 @@ class UserServiceClientConfig {
 
 
     @Bean
-    fun userScoreProvider(restTemplate: RestTemplate, clientConfig: ClientConfig): UserScoreProvider {
+    fun userScoreProvider(restTemplate: RestTemplate, clientConfig: ClientConfig, meterRegistry: MeterRegistry): UserScoreProvider {
         val userServiceClient = UserServiceClient(restTemplate, clientConfig.url)
         return if (clientConfig.cache.enabled)
-            CachedUserServiceClient(userServiceClient)
+            CachedUserServiceClient(userServiceClient, meterRegistry)
         else userServiceClient
     }
 
