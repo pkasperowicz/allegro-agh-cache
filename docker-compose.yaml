@@ -2,11 +2,18 @@ version: "3.9"
 services:
   app:
     build: ./app
+    depends_on:
+      - redis-cache
+      - user-service
     deploy:
       mode: replicated
       replicas: 2
     ports:
       - "8080"
+
+
+  user-service:
+    build: ./user-service
 
   nginx:
     image: nginx:1.21.6
@@ -17,8 +24,10 @@ services:
     ports:
       - "8080:80"
 
-  user-service:
-    build: ./user-service
+  redis-cache:
+    image: redis:6.2
+    ports:
+      - "6379:6379"
 
   prometheus:
     image: prom/prometheus:v2.39.1
