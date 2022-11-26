@@ -307,7 +307,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "rate(cache_gets_total{result=\"hit\"}[1m])",
+          "expr": "sum(rate(cache_gets_total{result=\"hit\"}[1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Hit rps",
@@ -319,7 +319,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "rate(cache_gets_total{result=\"miss\"}[1m])",
+          "expr": "sum(rate(cache_gets_total{result=\"miss\"}[1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Miss rps",
@@ -331,7 +331,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "rate(cache_evictions_total[1m])",
+          "expr": "sum(rate(cache_evictions_total[1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Evictions rps",
@@ -343,7 +343,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "rate(cache_load_total{result=\"success\"}[1m])",
+          "expr": "sum(rate(cache_load_total{result=\"success\"}[1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Load rps",
@@ -522,7 +522,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "cache_size",
+          "expr": "sum by (instance) (cache_size)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -621,6 +621,7 @@
       "type": "timeseries"
     }
   ],
+  "refresh": false,
   "schemaVersion": 33,
   "style": "dark",
   "tags": [],
@@ -635,6 +636,6 @@
   "timezone": "",
   "title": "Cart dashboard",
   "uid": "kYEE_rO4k",
-  "version": 5,
+  "version": 3,
   "weekStart": ""
 }

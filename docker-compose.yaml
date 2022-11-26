@@ -7,7 +7,7 @@ services:
       - user-service
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 2
     environment:
       USER-SERVICE_CACHE: "caffeine"
     ports:
