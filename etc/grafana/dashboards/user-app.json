@@ -205,7 +205,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "max by (exception) (rate(special_offer_seconds_count[1m]))",
+          "expr": "sum by (exception) (rate(special_offer_seconds_count[1m]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -629,13 +629,13 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Cart dashboard",
   "uid": "kYEE_rO4k",
-  "version": 3,
+  "version": 5,
   "weekStart": ""
 }
