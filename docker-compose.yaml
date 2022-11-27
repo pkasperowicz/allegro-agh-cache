@@ -9,7 +9,7 @@ services:
       mode: replicated
       replicas: 2
     environment:
-      USER-SERVICE_CACHE: "caffeine"
+      USER-SERVICE_CACHE: "redis"
     ports:
       - "8080"
 
