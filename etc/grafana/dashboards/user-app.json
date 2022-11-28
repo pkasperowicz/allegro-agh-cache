@@ -26,6 +26,7 @@
   "liveNow": false,
   "panels": [
     {
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -33,6 +34,7 @@
         "y": 0
       },
       "id": 12,
+      "panels": [],
       "title": "Endpoint",
       "type": "row"
     },
@@ -205,7 +207,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "max by (exception) (rate(special_offer_seconds_count[1m]))",
+          "expr": "sum by (exception) (rate(special_offer_seconds_count[1m]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -307,7 +309,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "rate(cache_gets_total{result=\"hit\"}[1m])",
+          "expr": "sum(rate(cache_gets_total{result=\"hit\"}[1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Hit rps",
@@ -319,7 +321,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "rate(cache_gets_total{result=\"miss\"}[1m])",
+          "expr": "sum(rate(cache_gets_total{result=\"miss\"}[1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Miss rps",
@@ -331,7 +333,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "rate(cache_evictions_total[1m])",
+          "expr": "sum(rate(cache_evictions_total[1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Evictions rps",
@@ -343,7 +345,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "rate(cache_load_total{result=\"success\"}[1m])",
+          "expr": "sum(rate(cache_load_total{result=\"success\"}[1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Load rps",
@@ -522,7 +524,7 @@
             "uid": "PBFE396EC0B189D67"
           },
           "exemplar": true,
-          "expr": "cache_size",
+          "expr": "sum by (instance) (cache_size)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -619,8 +621,211 @@
       ],
       "title": "Average cache load",
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 15,
+      "panels": [],
+      "title": "Redis",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFE396EC0B189D67"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 27
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFE396EC0B189D67"
+          },
+          "exemplar": true,
+          "expr": "sum(rate(redis_hit_count_total[1m]))",
+          "interval": "",
+          "legendFormat": "Hit rps",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFE396EC0B189D67"
+          },
+          "exemplar": true,
+          "expr": "sum(rate(redis_miss_count_total[1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Miss rps",
+          "refId": "B"
+        }
+      ],
+      "title": "Hit rps/Miss rps",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFE396EC0B189D67"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 27
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFE396EC0B189D67"
+          },
+          "exemplar": true,
+          "expr": "sum(increase(redis_hit_count_total[1m])) / (sum(increase(redis_hit_count_total[1m])) + sum(increase(redis_miss_count_total[1m])))",
+          "interval": "",
+          "legendFormat": "Hit rate",
+          "refId": "A"
+        }
+      ],
+      "title": "Hit rate",
+      "type": "timeseries"
     }
   ],
+  "refresh": false,
   "schemaVersion": 33,
   "style": "dark",
   "tags": [],
@@ -635,6 +840,6 @@
   "timezone": "",
   "title": "Cart dashboard",
   "uid": "kYEE_rO4k",
-  "version": 5,
+  "version": 8,
   "weekStart": ""
 }
