@@ -42,6 +42,11 @@ allprojects {
         withType<Test> {
             useJUnitPlatform()
         }
+
+        // fixes problem with building docker image for spring boot
+        named<Jar>("jar") {
+            enabled = false
+        }
     }
 }
 
