@@ -10,6 +10,7 @@
 
 ```shell
 git clone git@github.com:pkasperowicz/allegro-agh-cache.git
+cd allegro-agh-cache
 ./gradlew build
 docker compose up --build
 ```
