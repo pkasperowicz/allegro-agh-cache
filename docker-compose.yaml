@@ -8,6 +8,8 @@ services:
     deploy:
       mode: replicated
       replicas: 2
+    environment:
+      JAVA_OPTS: "-Dspring.profiles.active=localCache"
     ports:
       - "8080"
 
