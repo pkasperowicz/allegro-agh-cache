@@ -9,7 +9,7 @@ services:
       mode: replicated
       replicas: 2
     environment:
-      USER-SERVICE_CACHE: "redis"
+      JAVA_OPTS: "-Dspring.profiles.active=redis"
     ports:
       - "8080"
 
