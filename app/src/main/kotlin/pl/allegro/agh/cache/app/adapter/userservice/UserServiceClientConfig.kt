@@ -49,7 +49,7 @@ class UserServiceClientConfig {
 
     @Bean
     @Profile("redis")
-    fun userScoreProvider(
+    fun userScoreProviderWithRedisCache(
         restTemplate: RestTemplate,
         clientConfig: ClientConfig,
         meterRegistry: MeterRegistry,
